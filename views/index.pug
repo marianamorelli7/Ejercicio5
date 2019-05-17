@@ -1,0 +1,36 @@
+extends layout
+
+block header
+  script(src='./javascripts/load.js')
+
+block content
+  .row
+    .col-md-4
+      span
+    .col-md-4.mx-auto(style='padding-left: 3%; padding-right: 3%; text-align: center;')
+      h1= title
+      form.needs-validation(novalidate, method='post')
+        .form-group.text-center
+          label(for='site_id') Sitio
+          select#site_id.form-control(required, name='site_id', onchange='getCategory(this.value)')
+            each site in sites
+              option(value=site.id) #{site.name}
+          .invalid-feedback
+            | Debe seleccionar uno
+        .form-group.text-center
+          label(for='site_id') Categoria
+          select#category_id.form-control(name='category_id')
+          .form-group.text-center
+            label(for='columns') Columnas
+            input#columns.form-control(required, type='number', maxlength=1, name='columns', min='3', max='3')
+        .form-group.text-center
+          label(for='rows') Filas
+          input#rows.form-control(required, type='number', maxlength=1, name='rows', min='3', max='3')
+        .form-group.text-center
+          label(for='option') Opcion
+          select#option.form-control(required, name='option')
+            option(value='nombre') Nombre
+            option(value='imagen') Imagen
+        .input-group(style='text-align: center')
+          input.btn.btn-primary(type='submit', style='margin: 0 auto', value='Search')
+    .col-md-4
